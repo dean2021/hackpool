@@ -10,24 +10,41 @@ package main
 
 import (
 	"fmt"
-	"time"
+
+	"net/http"
 	"github.com/dean2020/hackpool"
+	"strconv"
 )
+
+// 回调函数
 func call_function(v interface{}) {
-	fmt.Println(v)
-	time.Sleep(time.Second * 1)
+	resp, err := http.Get(v.(string))
+	if err == nil {
+
+		fmt.Println(v, resp.StatusCode)
+	} else {
+		fmt.Println(err)
+	}
 }
 
 func main() {
-	thread_count := 10
-	queue_size := 100
+
+	// 协程(线程?^^)数量
+	thread_count := 20000
 	wp := hackpool.New(thread_count, call_function)
-	for i := 0; i < queue_size; i++ {
-		wp.Push(i)
+
+	urls := []string{}
+	for i := 0; i < 100000; i++ {
+		urls = append(urls, "https://item.jd.com/"+strconv.Itoa(i)+".html")
 	}
+	// 加入任务
+	for _, url := range urls {
+		wp.Push(url)
+	}
+
+	// 跑起来! 伙计
 	wp.Run()
 }
-
 ```
 
 ## Installation
