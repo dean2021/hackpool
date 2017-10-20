@@ -21,7 +21,7 @@ func call_function(v interface{}) {
 func main() {
 	thread_count := 10
 	queue_size := 100
-	wp := HackPool.New(thread_count, call_function)
+	wp := hackpool.New(thread_count, call_function)
 	for i := 0; i < queue_size; i++ {
 		wp.Push(i)
 	}
