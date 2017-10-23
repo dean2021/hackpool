@@ -20,7 +20,6 @@ import (
 func call_function(v interface{}) {
 	resp, err := http.Get(v.(string))
 	if err == nil {
-
 		fmt.Println(v, resp.StatusCode)
 	} else {
 		fmt.Println(err)
@@ -30,16 +29,12 @@ func call_function(v interface{}) {
 func main() {
 
 	// 协程(线程?^^)数量
-	thread_count := 20000
+	thread_count := 100
 	wp := hackpool.New(thread_count, call_function)
 
-	urls := []string{}
+	// 添加任务
 	for i := 0; i < 100000; i++ {
-		urls = append(urls, "https://item.jd.com/"+strconv.Itoa(i)+".html")
-	}
-	// 加入任务
-	for _, url := range urls {
-		wp.Push(url)
+		wp.Push("https://item.jd.com/" + strconv.Itoa(i) + ".html")
 	}
 
 	// 跑起来! 伙计
