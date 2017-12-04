@@ -11,8 +11,8 @@ package main
 import (
 	"fmt"
 	"time"
-	"github.com/dean2020/hackpool"
 )
+
 func call_function(v interface{}) {
 	fmt.Println(v)
 	time.Sleep(time.Second * 1)
@@ -21,13 +21,15 @@ func call_function(v interface{}) {
 func main() {
 	thread_count := 10
 	queue_size := 100
-	wp := hackpool.New(thread_count, call_function)
-	for i := 0; i < queue_size; i++ {
-		wp.Push(i)
-	}
+	wp := New(thread_count, call_function)
+	go func() {
+		for i := 0; i < queue_size; i++ {
+			wp.Push(i)
+		}
+		wp.Close() //close the task queue
+	}()
 	wp.Run()
 }
-
 ```
 
 ## Installation
