@@ -11,6 +11,7 @@ package main
 import (
 	"fmt"
 	"time"
+	"github.com/Greyh4t/hackpool"
 )
 
 func call_function(v interface{}) {
@@ -26,7 +27,7 @@ func main() {
 		for i := 0; i < queue_size; i++ {
 			wp.Push(i)
 		}
-		wp.Close() //close the task queue
+		wp.Close() //关闭任务队列，跑完本次任务就退出。若不关闭，则可以一直往里写任务
 	}()
 	wp.Run()
 }
