@@ -14,7 +14,7 @@ type HackPool struct {
 func New(thread_count int, callfunc func(interface{})) *HackPool {
 	t := &HackPool{
 		c:            make(chan struct{}, thread_count),
-		queue:        make(chan interface{}, thread_count*2),
+		queue:        make(chan interface{}, thread_count),
 		thread_count: thread_count,
 		callfunc:     callfunc,
 	}
