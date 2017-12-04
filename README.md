@@ -11,6 +11,7 @@ package main
 import (
 	"fmt"
 	"time"
+
 	"github.com/Greyh4t/hackpool"
 )
 
@@ -21,10 +22,10 @@ func call_function(v interface{}) {
 
 func main() {
 	thread_count := 10
-	queue_size := 100
+	task_count := 100
 	wp := hackpool.New(thread_count, call_function)
 	go func() {
-		for i := 0; i < queue_size; i++ {
+		for i := 0; i < task_count; i++ {
 			wp.Push(i)
 		}
 		wp.Close() //关闭任务队列，跑完本次任务就退出。若不关闭，则可以一直往里写任务
