@@ -11,16 +11,23 @@ package main
 import (
 	"fmt"
 	"time"
-
-	"github.com/Greyh4t/hackpool"
+	"net/http"
+	"github.com/dean2020/hackpool"
+	"strconv"
 )
 
+// 回调函数
 func call_function(v interface{}) {
-	fmt.Println(v)
-	time.Sleep(time.Second * 1)
+	resp, err := http.Get(v.(string))
+	if err == nil {
+		fmt.Println(v, resp.StatusCode)
+	} else {
+		fmt.Println(err)
+	}
 }
 
 func main() {
+
 	thread_count := 10
 	task_count := 100
 	wp := hackpool.New(thread_count, call_function)
@@ -30,6 +37,8 @@ func main() {
 		}
 		wp.Close() //关闭任务队列，跑完本次任务就退出。若不关闭，则可以一直往里写任务
 	}()
+  
+	// 跑起来! 伙计
 	wp.Run()
 }
 ```
