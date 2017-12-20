@@ -1,6 +1,6 @@
 # HackPool
 
-非常优雅的协程库
+北半球最优雅的协程库
 
 ## Example
 
@@ -10,15 +10,15 @@ package main
 
 import (
 	"fmt"
+	"github.com/dean2020/hackpool"
 )
 
 func main() {
 
-	var hp *HackPool
 	numGoroutine := 2
 	taskCount := 100
 
-	hp = hackpool.New(numGoroutine, func(i interface{}) {
+	hp := hackpool.New(numGoroutine, func(i interface{}) {
 		fmt.Println(i.(int))
 	})
 
