@@ -3,7 +3,6 @@ package hackpool
 import (
 	"testing"
 	"fmt"
-	"time"
 )
 
 func TestHackPool(t *testing.T) {
@@ -16,7 +15,7 @@ func TestHackPool(t *testing.T) {
 
 		fmt.Println(i.(int))
 
-		time.Sleep(time.Second * 2)
+		//time.Sleep(time.Second * 2)
 	})
 
 	// 由于同步往有缓冲通道塞数据,元素个数超过chan定义的长度,会造成死锁,所以必须异步塞数数据

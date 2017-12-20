@@ -47,13 +47,13 @@ func (c *HackPool) Run() {
 
 		go func(value interface{}) {
 
-			defer wg.Done()
-
 			c.function(value)
 
 			// 阻塞, 等待state被赋值.
 			// 增加state的目的是为了保证每个函数能够执行完,也就是保证同时执行的函数数量
 			<-c.state
+
+			wg.Done()
 		}(v)
 	}
 
