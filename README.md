@@ -10,7 +10,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/dean2020/hackpool"
+	"github.com/poc-db/hackpool"
 )
 
 func main() {
