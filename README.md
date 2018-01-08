@@ -39,7 +39,7 @@ func main() {
 
 ## Installation
 
-    go get github.com/dean2020/hackpool
+    go get github.com/poc-db/hackpool
 
 ## License
 
