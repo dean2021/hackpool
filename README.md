@@ -15,10 +15,10 @@ import (
 
 func main() {
 
-	numGoroutine := 2
-	taskCount := 100
+	concurrency := 2   // 并发数
+	taskCount := 100   
 
-	hp := hackpool.New(numGoroutine, func(i interface{}) {
+	hp := hackpool.New(concurrency, func(i interface{}) {
 		fmt.Println(i.(int))
 	})
 
